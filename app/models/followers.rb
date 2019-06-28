@@ -26,6 +26,18 @@ class Followers
         @@all.select {|flwr| flwr.age >= age}
     end
 
+    def my_cults_slogans
+        @cults.each {|culte| puts culte.slogan}
+    end
+
+    def self.most_active
+        @@all.max_by {|flwr| flwr.cults.count}
+    end
+
+    def self.top_ten
+        topten = @@all.sort_by {|flwr| flwr.cults.count}.reverse
+        topten[0..9]
+    end
 
 
 

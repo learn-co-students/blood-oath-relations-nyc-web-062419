@@ -35,12 +35,31 @@ class Cult
             self.followers.count
         end
 
+        def self.cult_location_count(location)
+            @@all.select {|culte| culte.location == location}.count
+        end
+
         def recruit_follower(date, follower)
             Bloodoath.new(date, self, follower)
         end
 
+        def average_age
+            total_age = 0.0
+            self.followers.each {|flwr| total_age += flwr.age}
+            total_age / cult_population
+        end
+        
+        def my_followers_mottos
+            self.followers.map {|flwr| flwr.life_motto}
+        end
 
+        def self.least_popular
+            @@all.min_by {|culte| culte.cult_population}
+        end
 
+        def self.most_common_location
+            @@all.max_by {|culte| cult_location_count(culte.location)}.location
+        end
 
 
 
