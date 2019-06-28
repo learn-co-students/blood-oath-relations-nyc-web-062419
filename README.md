@@ -64,7 +64,7 @@ Questions you should ask yourself:
 * `Cult#recruit_follower`
   * takes in an argument of a `Follower` instance and adds them to this cult's list of followers
 * `Cult#cult_population`
-  * returns a `Fixnum` that is the number of followers in this cult
+  *
 * `Cult.all`
   * returns an `Array` of all the cults
 * `Cult.find_by_name`
