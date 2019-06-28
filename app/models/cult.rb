@@ -1,3 +1,4 @@
+require "pry"
 class Cult
 
     attr_reader :name, :founding_year, :cult_followers
@@ -68,11 +69,7 @@ class Cult
     def self.most_common_location
         all_location_numbers = {}
         all_locations.each {|location| if all_location_numbers[location] then all_location_numbers[location] += 1 else all_location_numbers[location] = 1 end}
-        most_cults = all_location_numbers.max_by {|key, value| value}.key
-
-        # locations = self.all.collect {|cult| cult.location}
-        # location_numbers = locations.collect {|location| self.find_by_location(location).length}
-    
+        most_cults = all_location_numbers.max_by {|key, value| value}[0]
     end
 
 end
