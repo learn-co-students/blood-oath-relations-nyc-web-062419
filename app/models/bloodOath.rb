@@ -8,7 +8,7 @@ class BloodOath
         @initiation_date = date
         @cult = cult
         @follower = follower
-        @@all << self
+        BloodOath.all << self
         follower.join_cult(cult)
         cult.recruit_follower(follower)
     end

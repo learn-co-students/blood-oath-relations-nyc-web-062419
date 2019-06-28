@@ -1,6 +1,6 @@
 class Cult
 
-    attr_reader :name, :founding_year
+    attr_reader :name, :founding_year, :cult_followers
     attr_accessor :slogan, :location
 
     @@all = []
@@ -11,7 +11,7 @@ class Cult
         @founding_year = founding_year
         @slogan = slogan
         @cult_followers = []
-        @@all << self
+        Cult.all << self
     end
 
     def recruit_follower (follower)
@@ -42,6 +42,37 @@ class Cult
         self.all.select do |year_instance|
             year_instance.founding_year == num
         end
+    end
+
+    def average_age
+        ages = []
+        self.cult_followers.each do |follower|
+            ages << follower.age
+        end
+        ages.inject {|sum, age| sum + age}.to_f / ages.size
+    end
+
+    def my_followers_mottos
+        self.cult_followers.each {|follower| puts follower.life_motto}
+        nil
+    end
+
+    def self.least_popular
+        self.all.sort_by {|cult| cult.cult_population}.first
+    end
+
+    def self.all_locations
+        self.all.collect {|cult| cult.location}
+    end
+
+    def self.most_common_location
+        all_location_numbers = {}
+        all_locations.each {|location| if all_location_numbers[location] then all_location_numbers[location] += 1 else all_location_numbers[location] = 1 end}
+        most_cults = all_location_numbers.max_by {|key, value| value}.key
+
+        # locations = self.all.collect {|cult| cult.location}
+        # location_numbers = locations.collect {|location| self.find_by_location(location).length}
+    
     end
 
 end

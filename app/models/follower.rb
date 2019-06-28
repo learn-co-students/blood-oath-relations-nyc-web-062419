@@ -10,7 +10,7 @@ class Follower
         @age = age
         @life_motto = life_motto
         @cults = []
-        @@all << self
+        Follower.all << self
     end
 
     def join_cult (cult)
