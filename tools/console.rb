@@ -4,9 +4,9 @@ def reload
   load 'config/environment.rb'
 end
 
-cult1 = Cult.new("cult1", "New York", "1985", "Eat my Shorts")
-cult2 = Cult.new("cult2", "New York", "1987", "The World's Gonna End!")
-cult3 = Cult.new("cult3", "Connecticut", "1983", "Blood!")
+cult1 = Cult.new("cult1", "New York", 1985, "Eat my Shorts")
+cult2 = Cult.new("cult2", "New York", 1987, "The World's Gonna End!")
+cult3 = Cult.new("cult3", "Connecticut", 1983, "Blood!")
 
 follower1 = Follower.new("Joe", 20, "My life sucks")
 follower2 = Follower.new("Ashley", 67, "What is life?")

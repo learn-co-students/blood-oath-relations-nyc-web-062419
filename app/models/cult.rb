@@ -1,7 +1,7 @@
 require "pry"
 class Cult
 
-    attr_reader :name, :founding_year, :cult_followers
+    attr_reader :name, :founding_year, :followers
     attr_accessor :slogan, :location
 
     @@all = []
@@ -11,16 +11,21 @@ class Cult
         @location = location
         @founding_year = founding_year
         @slogan = slogan
-        @cult_followers = []
         Cult.all << self
     end
 
     def recruit_follower (follower)
-        @cult_followers << follower
+        date = Time.now.to_s[0..9]
+        BloodOath.new(date, self, follower)
+    end
+
+    def followers
+        oaths = BloodOath.all.select {|oath| oath.cult == self}
+        oaths.collect {|oath| oath.follower}
     end
 
     def cult_population
-        @cult_followers.length
+        self.followers.count
     end
 
     def self.all
@@ -47,15 +52,14 @@ class Cult
 
     def average_age
         ages = []
-        self.cult_followers.each do |follower|
+        self.followers.each do |follower|
             ages << follower.age
         end
         ages.inject {|sum, age| sum + age}.to_f / ages.size
     end
 
     def my_followers_mottos
-        self.cult_followers.each {|follower| puts follower.life_motto}
-        nil
+        self.followers.each {|follower| puts follower.life_motto}
     end
 
     def self.least_popular

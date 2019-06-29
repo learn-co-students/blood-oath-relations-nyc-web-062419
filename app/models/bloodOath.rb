@@ -9,8 +9,6 @@ class BloodOath
         @cult = cult
         @follower = follower
         BloodOath.all << self
-        follower.join_cult(cult)
-        cult.recruit_follower(follower)
     end
 
     def self.all
