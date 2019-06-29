@@ -17,4 +17,8 @@ class BloodOath
         @@all
     end
 
+    def self.first_oath
+       self.all.sort_by {|oath| oath.initiation_date}.first.follower
+    end
+
 end

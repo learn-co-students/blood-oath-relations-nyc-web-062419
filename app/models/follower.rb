@@ -27,4 +27,18 @@ class Follower
         end
     end
 
+    def my_cults_slogans
+        self.cults.each {|cult| puts "#{cult.slogan} "}
+        nil
+    end
+
+    def self.most_active
+        self.all.sort_by {|follower| follower.cults.count}.last
+    end
+
+    def self.top_ten
+        followers = self.all.sort_by {|follower| follower.cults.count}
+        followers[followers.length-10..followers.length]
+    end
+
 end
