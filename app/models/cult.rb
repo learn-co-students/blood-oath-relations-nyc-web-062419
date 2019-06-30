@@ -1,22 +1,27 @@
 require "pry"
 class Cult
 
-    attr_reader :name, :founding_year, :followers
+    attr_reader :name, :founding_year, :followers, :minimum_age
     attr_accessor :slogan, :location
 
     @@all = []
 
-    def initialize (name, location, founding_year, slogan)
+    def initialize (name, location, founding_year, slogan, minimum_age)
         @name = name
         @location = location
         @founding_year = founding_year
         @slogan = slogan
+        @minimum_age = minimum_age
         Cult.all << self
     end
 
     def recruit_follower (follower)
-        date = Time.now.to_s[0..9]
-        BloodOath.new(date, self, follower)
+        if follower.age < minimum_age
+            puts "Sorry, you must be #{minimum_age} or older to join #{self.name}."
+        else
+            date = Time.now.to_s[0..9]
+            BloodOath.new(date, self, follower)
+        end
     end
 
     def followers
